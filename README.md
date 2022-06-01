@@ -28,6 +28,6 @@ https://docs.google.com/spreadsheets/d/1N32hiuvUwsiqgAYoBFiOpHVLC-Tsg6OEkk6Tgh04
 ## ワイヤーフレーム
 https://cacoo.com/diagrams/dPEZONJz3W8QxzbG/260C1
 
-![ss](https://user-images.githubusercontent.com/97660079/171111662-dcf39002-1cc8-4cb2-a4b7-a4589a0dec7b.png)
+![ss](https://user-images.githubusercontent.com/97660079/171310833-43a45f4e-6989-4b51-a9d3-2744558c1069.png)
 
-![ss2](https://user-images.githubusercontent.com/97660079/171111827-20b043d1-667f-4461-9a05-f18c69fa6e82.png)
+![ss2](https://user-images.githubusercontent.com/97660079/171310933-1d72fc46-d5c2-45dc-92dc-ada5d010d14d.png)
