@@ -23,7 +23,7 @@ rails s -b 0.0.0.0
 https://docs.google.com/spreadsheets/d/1N32hiuvUwsiqgAYoBFiOpHVLC-Tsg6OEkk6Tgh04xUE/edit?usp=sharing
 
 ## テーブル定義
-https://docs.google.com/spreadsheets/d/1N32hiuvUwsiqgAYoBFiOpHVLC-Tsg6OEkk6Tgh04xUE/edit?usp=sharing
+https://docs.google.com/spreadsheets/d/1cvr1IGxyryqYyPeskaZXXsZaHTkDJgdjeYhqvXC1Fto/edit?usp=sharing
 
 ## ワイヤーフレーム
 https://cacoo.com/diagrams/dPEZONJz3W8QxzbG/260C1
