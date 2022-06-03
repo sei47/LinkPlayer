@@ -1,0 +1,30 @@
+<h1>コミュニティ一覧</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>コミュニティ名</th>
+      <th>題材</th>
+      <th>コメント</th>
+      <th>更新日時</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @communities.each do |community| %>
+      <tr>
+        <td><%= community.icon %></td>
+        <td><%= community.name %></td>
+        <td><%= community.updated_at %></td>
+        <td><%= link_to 'Show', blog %></td>
+        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
+        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to '', new_ _path %>
