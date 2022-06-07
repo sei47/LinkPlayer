@@ -1,7 +1,7 @@
-<%= form_with(model: blog, local: true) do |form| %>
-  <% if blog.errors.any? %>
+<%= form_with(model: community, local: true) do |form| %>
+  <% if community.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(blog.errors.count, "error") %> prohibited this blog from being saved:</h2>
+      <h2><%= pluralize(community.errors.count, "error") %> prohibited this blog from being saved:</h2>
 
       <ul>
         <% community.errors.full_messages.each do |message| %>
@@ -23,15 +23,15 @@
 
   <div class="field">
     <%= form.label :icon %>
-    <%= image_tag(community.image.url)if picture.image && picture.image.url %>
+    <%= image_tag(community.icon.url)if community.icon && community.icon.url %>
     <%= form.file_field :icon %>
   </div>
 
-  <div class="field">
-    <!---><% if action_name == 'edit' %>
-      ゲーム選ぶ処理
-    <% end %><--->
-  </div>
+  <% if action_name == 'new' %>
+    <div class="field">
+        <%= f.collection_select :game_id, Game.all, :id, :name %>
+    </div>
+  <% end %>
 
   <div class="actions">
     <%= form.submit %>
