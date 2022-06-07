@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_06_042052) do
+ActiveRecord::Schema.define(version: 2022_06_07_060738) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,24 @@ ActiveRecord::Schema.define(version: 2022_06_06_042052) do
     t.index ["game_id"], name: "index_communities_on_game_id"
   end
 
+  create_table "community_tags", force: :cascade do |t|
+    t.bigint "community_id"
+    t.bigint "tag_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["community_id"], name: "index_community_tags_on_community_id"
+    t.index ["tag_id"], name: "index_community_tags_on_tag_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.text "info"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "tags", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -52,4 +67,6 @@ ActiveRecord::Schema.define(version: 2022_06_06_042052) do
   end
 
   add_foreign_key "communities", "games"
+  add_foreign_key "community_tags", "communities"
+  add_foreign_key "community_tags", "tags"
 end

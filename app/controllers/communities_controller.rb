@@ -18,7 +18,8 @@ class CommunitiesController < ApplicationController
   end
 
   def create
-    @community = current_user.communities.build(community_params)
+    @community = Community.new(community_params)
+    @community.create_user_id = current_user.id
     if @community.save
       redirect_to community_path(@community), notice: "登録しました"
     else
@@ -29,7 +30,7 @@ class CommunitiesController < ApplicationController
 
   def update
     set_community
-    if @task.update(community_params)
+    if @community.update(community_params)
       redirect_to communities_path, notice: "更新しました"
     else
       render :edit
@@ -49,6 +50,6 @@ class CommunitiesController < ApplicationController
   end
 
   def community_params
-    params.require(:community).permit(:name, :icon, :comment)
+    params.require(:community).permit(:name, :icon, :comment, :create_user_id, :game_id)
   end
 end

@@ -27,12 +27,16 @@
     <%= form.file_field :icon %>
   </div>
 
-  <% if action_name == 'new' %>
-    <div class="field">
-        <%= f.collection_select :game_id, Game.all, :id, :name %>
-    </div>
-  <% end %>
+  <div class="field">
+    <% if action_name == 'new' %>
+      <%= form.collection_select :game_id, Game.all, :id, :name %>
+    <% end %>
+  </div>
 
+  <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) do |label| %>
+    <%= label.label { label.check_box + label.text } %>
+  <% end %>
+  
   <div class="actions">
     <%= form.submit %>
   </div>

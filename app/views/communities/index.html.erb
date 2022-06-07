@@ -14,12 +14,14 @@
   <tbody>
     <% @communities.each do |community| %>
       <tr>
-        <td><%= community.icon %></td>
+        <td><%= image_tag(community.icon.url) %></td>
         <td><%= community.name %></td>
+        <td><%= community.game.name %></td>
+        <td><%= community.comment %></td>
         <td><%= community.updated_at %></td>
-        <td><%= link_to 'Show', blog %></td>
-        <td><%= link_to 'Edit', edit_blog_path(blog) %></td>
-        <td><%= link_to 'Destroy', blog, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Show', community %></td>
+        <td><%= link_to 'Edit', edit_community_path(community) %></td>
+        <td><%= link_to 'Destroy', community, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
