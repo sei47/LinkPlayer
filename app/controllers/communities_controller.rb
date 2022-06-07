@@ -21,6 +21,7 @@ class CommunitiesController < ApplicationController
     @community = Community.new(community_params)
     @community.create_user_id = current_user.id
     if @community.save
+      @community.community_participation(@community.create_user_id)
       redirect_to community_path(@community), notice: "登録しました"
     else
       flash.now[:danger] = "保存に失敗しました"
@@ -50,6 +51,6 @@ class CommunitiesController < ApplicationController
   end
 
   def community_params
-    params.require(:community).permit(:name, :icon, :comment, :create_user_id, :game_id)
+    params.require(:community).permit(:name, :icon, :comment, :create_user_id, :game_id, {tag_ids: []})
   end
 end

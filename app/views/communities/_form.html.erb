@@ -33,10 +33,10 @@
     <% end %>
   </div>
 
-  <%= form.collection_check_boxes(:label_ids, Label.all, :id, :name) do |label| %>
-    <%= label.label { label.check_box + label.text } %>
+  <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+    <%= tag.label { tag.check_box + tag.text } %>
   <% end %>
-  
+
   <div class="actions">
     <%= form.submit %>
   </div>
