@@ -29,6 +29,17 @@ class CommunitiesController < ApplicationController
     end
   end
 
+  # def participation
+  #   set_community
+  #   @community.community_participation(current_user.id)
+  #   redirect_to community_path(@community), notice: "参加しました"
+  # end
+  #
+  # def secession
+  #   set_community
+  #   @community.community_secession(current_user.id)
+  # end
+
   def update
     set_community
     if @community.update(community_params)

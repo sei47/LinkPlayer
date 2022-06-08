@@ -4,7 +4,17 @@ class ParticipantsController < ApplicationController
     if participant.save
       redirect_to community_path(@community), notice: "参加しました"
     else
-      flash.now[:danger] = "保存に失敗しました"
+      flash.now[:danger] = "失敗しました"
+      redirect_to communities_path
+    end
+  end
+
+  def destroy
+    participant = Participant.find_by(user_id: participant_params[:user_id])
+    if participant.destroy
+      redirect_to community_path(@community), notice: "脱退しました"
+    else
+      flash.now[:danger] = "失敗しました"
       redirect_to communities_path
     end
   end
@@ -12,6 +22,6 @@ class ParticipantsController < ApplicationController
   private
 
   def participant_params
-    params.require(:participant).permit(:community_id, :user_id)
+    params.permit(:community_id, :user_id)
   end
 end

@@ -11,7 +11,12 @@ class Community < ApplicationRecord
   has_many :users, through: :participants
   mount_uploader :icon, ImageUploader
 
-  def community_participation(user)
-    participants.create(user_id: user)
-  end
+  # def community_participation(user)
+  #   participants.create(user_id: user)
+  # end
+  #
+  # def community_secession(user)
+  #   binding.irb
+  #   participants.destroy(user_id: user)
+  # end
 end
