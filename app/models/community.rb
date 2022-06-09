@@ -8,7 +8,10 @@ class Community < ApplicationRecord
   has_many :tags, through: :community_tags
 
   has_many :participants, dependent: :destroy
-  has_many :users, through: :participants
+  has_many :join_users, through: :participants, source: :user
+  has_many :posts, dependent: :destroy
+  has_many :posting_users, through: :posts, source: :user
+
   mount_uploader :icon, ImageUploader
 
   # def community_participation(user)

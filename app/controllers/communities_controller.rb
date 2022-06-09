@@ -11,6 +11,8 @@ class CommunitiesController < ApplicationController
 
   def show
     set_community
+    @posts = @community.posts
+    @post = @community.posts.build
   end
 
   def edit

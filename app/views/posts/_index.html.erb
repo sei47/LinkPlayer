@@ -1,0 +1,10 @@
+<ul>
+  <% posts.each do |post| %>
+    <% if post.id.present? %>
+      <li>
+        <p><%= post.user.name %></p>
+        <p><%= post.content %></p>
+      </li>
+    <% end %>
+  <% end %>
+</ul>

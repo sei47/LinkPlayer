@@ -1,0 +1,3 @@
+$("#posts_area").html("<%= j(render partial: 'posts/index', locals: { posts: @post.community.posts, community: @post.community }) %>");
+$("textarea").val('');
+$("#notice").html("<%= j flash[:notice] %>");

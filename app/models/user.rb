@@ -6,4 +6,6 @@ class User < ApplicationRecord
 
   has_many :participants
   has_many :communities, through: :participants
+  has_many :posts
+  has_many :communities, through: :posts
 end

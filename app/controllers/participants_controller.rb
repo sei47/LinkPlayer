@@ -2,7 +2,7 @@ class ParticipantsController < ApplicationController
   def create
     participant = Participant.new(participant_params)
     if participant.save
-      redirect_to community_path(@community), notice: "参加しました"
+      redirect_to community_path(params[:id]), notice: "参加しました"
     else
       flash.now[:danger] = "失敗しました"
       redirect_to communities_path
@@ -10,9 +10,9 @@ class ParticipantsController < ApplicationController
   end
 
   def destroy
-    participant = Participant.find_by(user_id: participant_params[:user_id])
+    participant = Participant.where(community_id: participant_params[:community_id]).find_by(user_id: participant_params[:user_id])
     if participant.destroy
-      redirect_to community_path(@community), notice: "脱退しました"
+      redirect_to community_path(params[:id]), notice: "脱退しました"
     else
       flash.now[:danger] = "失敗しました"
       redirect_to communities_path

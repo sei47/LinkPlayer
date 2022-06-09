@@ -3,14 +3,18 @@
   <strong>Title:</strong>
   <%= @community.name %>
 </p>
-
-<% if @community.users.find_by_id(current_user.id) == nil %>
+<% if @community.join_users.find_by_id(current_user.id) == nil %>
   <%= button_to '参加', {controller: 'participants', action: 'create', params: {community_id: @community.id, user_id: current_user.id} } %>
 <% else %>
   <%= button_to '脱退', { controller: 'participants', action: 'destroy', params: {community_id: @community.id, user_id: current_user} },method: :delete %>
 <% end %>
-<p>
 
-</p>
+<div id="posts_area">
+  <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
+  <%= render partial: 'posts/index', locals: { posts: @posts, community: @community } %>
+</div>
+
+<!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
+<%= render partial: 'posts/form', locals: { post: @post, community: @community } %>
 
 <%= link_to 'Edit', edit_community_path(@community) %> |
