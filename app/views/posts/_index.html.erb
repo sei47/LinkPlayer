@@ -4,6 +4,9 @@
       <li>
         <p><%= post.user.name %></p>
         <p><%= post.content %></p>
+        <% unless image_tag(post.image.url) == "<img src=\"/assets/default-f06214b187a2461dd5008a7f2aa38f754076d265ff288ce50a389ed827c6c938.png\" />" %>
+          <p><%= image_tag(post.image.url) %></p>
+        <% end %>
       </li>
     <% end %>
   <% end %>

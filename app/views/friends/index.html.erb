@@ -1,0 +1,5 @@
+<h2>フレンド一覧</h2>
+<% @friends.each do |friend| %>
+  <%= friend.partner.name %>
+  <%= render 'friend_form', user: user %>
+<% end %>

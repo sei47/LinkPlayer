@@ -15,6 +15,11 @@
     <%= form.text_area :content %>
   </div>
 
+  <div class="field">
+    <%= form.label :image %>
+    <%= image_tag(post.image.url)if post.image && post.image.url %>
+    <%= form.file_field :image %>
+  </div>
   <div class="actions">
     <%= form.submit %>
   </div>

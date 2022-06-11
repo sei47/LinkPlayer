@@ -1,0 +1,6 @@
+<% if @request.present?  %>
+  <% @request.each do |request| %>
+    <%= button_to '承認', {controller: 'friends', action: 'accept', params: {request_id: request.id} } %>
+    <%= button_to '拒否', { controller: 'friends', action: 'destroy', params: {request_id: request.id} },method: :delete %>
+  <% end %>
+<% end %>

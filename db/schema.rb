@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_08_090518) do
+ActiveRecord::Schema.define(version: 2022_06_11_174647) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -35,11 +35,33 @@ ActiveRecord::Schema.define(version: 2022_06_08_090518) do
     t.index ["tag_id"], name: "index_community_tags_on_tag_id"
   end
 
+  create_table "friends", force: :cascade do |t|
+    t.boolean "request"
+    t.integer "myself_id"
+    t.integer "partner_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["myself_id", "partner_id"], name: "index_friends_on_myself_id_and_partner_id", unique: true
+    t.index ["myself_id"], name: "index_friends_on_myself_id"
+    t.index ["partner_id"], name: "index_friends_on_partner_id"
+  end
+
   create_table "games", force: :cascade do |t|
     t.string "name"
     t.text "info"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.text "message"
+    t.string "message_image"
+    t.bigint "friend_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["friend_id"], name: "index_messages_on_friend_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "participants", force: :cascade do |t|
@@ -89,6 +111,8 @@ ActiveRecord::Schema.define(version: 2022_06_08_090518) do
   add_foreign_key "communities", "games"
   add_foreign_key "community_tags", "communities"
   add_foreign_key "community_tags", "tags"
+  add_foreign_key "messages", "friends"
+  add_foreign_key "messages", "users"
   add_foreign_key "participants", "communities"
   add_foreign_key "participants", "users"
   add_foreign_key "posts", "communities"

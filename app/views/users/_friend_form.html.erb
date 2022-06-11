@@ -1,0 +1,12 @@
+<div id="friend_form_<%= user.id %>">
+  <% unless current_user.friendly?(user) %>
+    <%= form_with(model: current_user.active_friends.build(partner_id: user.id))  do |f| %>
+      <%= f.hidden_field :partner_id %>
+      <%= f.submit "申請する" %>
+    <% end %>
+  <% else %>
+    <%= form_with(model: current_user.active_friends.find_by(partner_id: user.id), method: :delete ) do |f| %>
+      <%= f.submit "解除" %>
+    <% end %>
+  <% end %>
+</div>
