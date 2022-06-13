@@ -22,6 +22,10 @@ class UsersController < ApplicationController
     @request = @user.passive_friends.where(request: false)
   end
 
+  def my_message
+    @friends = current_user.active_friends
+  end
+
   private
 
   def user_params

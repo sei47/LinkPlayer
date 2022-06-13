@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :users
+  resources :messages, only:[:new, :create, :index]
   resources :friends, only:[:index, :create, :destroy] do
     member do
       post :accept

@@ -1,5 +1,5 @@
 <h2>フレンド一覧</h2>
 <% @friends.each do |friend| %>
-  <%= friend.partner.name %>
-  <%= render 'friend_form', user: user %>
+  <%= friend.partner.email %>
+  <%= link_to 'フレンド解除', friend_path(friend.id), method: :delete %>
 <% end %>

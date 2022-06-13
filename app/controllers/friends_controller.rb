@@ -21,7 +21,7 @@ class FriendsController < ApplicationController
   end
 
   def destroy
-    @request = Friend.find(params[:request_id])
+    @request = Friend.find(params[:id])
     if @request.request?
       @user = @request.partner
       current_user.elimination(@user)
@@ -29,6 +29,7 @@ class FriendsController < ApplicationController
       @user = @request.myself
       current_user.unfriend(@user)
     end
+    redirect_to user_path(current_user.id)
   end
 
   private

@@ -1,0 +1,32 @@
+<%= form_with(model: @message, local: true) do |form| %>
+  <% if @message.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@message.errors.count, "error") %> prohibited this blog from being saved:</h2>
+
+      <ul>
+        <% @message.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.select :partner_search, @friends.pluck(:partner_id) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :message %>
+    <%= form.text_field :message %>
+  </div>
+
+  <div class="field">
+    <%= form.label :message_image %>
+    <%= image_tag(@message.message_image.url)if @message.message_image && @message.message_image.url %>
+    <%= form.file_field :message_image %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

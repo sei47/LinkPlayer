@@ -1,6 +1,7 @@
 class Friend < ApplicationRecord
   belongs_to :myself, class_name: "User"
   belongs_to :partner, class_name: "User"
+  has_many :messages
 
   def friend_request!(partner)
     active_friends.create!(request: false, partner_id: partner.id)

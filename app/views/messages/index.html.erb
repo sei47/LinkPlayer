@@ -1,0 +1,19 @@
+<% if params[:output] %>
+  <h2>受信一覧</h2>
+  <%= link_to '送信済一覧', messages_path(output: nil) %>
+  <% @friends.each do |friend| %>
+    <% friend.myself.messages.each do |message| %>
+      <%= message.user.name %>
+      <%= message.message %>
+      <%= image_tag(message.message_image.url)if message.message_image && message.message_image.url %>
+    <% end %>
+  <% end %>
+<% else %>
+  <h2>送信一覧</h2>
+  <%= link_to '受信一覧', messages_path(output: true) %>
+  <% @messages.each do |message| %>
+    <%= message.friend.partner.email %>
+    <%= message.message %>
+    <%= image_tag(message.message_image.url)if message.message_image && message.message_image.url %>
+  <% end %>
+<% end %>

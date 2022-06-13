@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :communities, through: :participants
   has_many :posts
   has_many :communities, through: :posts
+  has_many :messages, dependent: :destroy
 
   has_many :active_friends, foreign_key: 'myself_id', class_name: 'Friend', dependent: :destroy
   has_many :passive_friends, foreign_key: 'partner_id', class_name: 'Friend', dependent: :destroy
