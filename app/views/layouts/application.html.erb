@@ -14,11 +14,6 @@
     <% if user_signed_in? %>
       <% if User.push_message(current_user) %>
         <script>
-          // var e = Encoding.convert(cookiesArray[1], {
-          //     to: 'UNICODE',
-          //     from: 'SJIS',
-          //     type: 'string' // 文字列で返るよう 'string' を指定
-          //   });
           Push.create("新着メッセージがあります"), {
               timeout: 4000,
               onClick: function () {
@@ -32,9 +27,21 @@
 
     <% if user_signed_in? %>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <% if request.path_info != communities_path %>
+        <li><%= link_to 'コミュニティ一覧へ', communities_path %></li>
+      <% end %>
+      <% if request.path_info != user_path(current_user) %>
+        <li><%= link_to 'マイページ', user_path(current_user) %></li>
+      <% end %>
+      <% if request.path_info != friends_path %>
+        <li><%= link_to 'フレンド一覧へ', friends_path %></li>
+      <% end %>
+      <li><%= link_to '管理画面へ', rails_admin_path %></li>
     <% else %>
+      <li><%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "login" %></li>
       <li><%= link_to 'ログイン', new_user_session_path %></li>
       <li><%= link_to 'サインアップ', new_user_registration_path %></li>
+      <li><%= link_to 'コミュニティ一覧へ', communities_path %></li>
     <% end %>
 
     <% if notice %>

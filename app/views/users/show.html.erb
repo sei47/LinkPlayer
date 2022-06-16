@@ -1,6 +1,29 @@
 <% if @request.present?  %>
   <% @request.each do |request| %>
+    <p>ユーザー名：<%= request.myself.name %></p>
     <%= button_to '承認', { controller: 'friends', action: 'accept', params: {request_id: request.id} } %>
+    ―――――――――――――――――――――――
     <%= button_to '拒否', { controller: 'friends', action: 'destroy', params: {id: request.id} },method: :delete %>
   <% end %>
 <% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>所属コミュニティ</th>
+      <th>題材</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @communities.each do |community| %>
+      <tr>
+        <td><%= image_tag(community.icon.url) %></td>
+        <td><%= community.name %></td>
+        <td><%= community.game.name %></td>
+        <td><%= link_to 'Show', community %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

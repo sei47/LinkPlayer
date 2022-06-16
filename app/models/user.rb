@@ -47,11 +47,20 @@ class User < ApplicationRecord
 
   def self.push_message(current_user)
     messages = Message.where(destination: current_user.id).order(created_at: "DESC")
-    messages = 0 unless messages.present?
-    if current_user.message_read.message_read_last < messages[0]
-      current_user.message_read.message_read_last = messages[0]
-      current_user.message_read.update
-      return true
+    if messages.present?
+      if current_user.message_read.message_read_last < messages[0].id
+        current_user.message_read.update(message_read_last: messages[0].id)
+        return true
+      end
+    end
+  end
+
+  def self.guest
+    find_or_create_by!(email: 'guest@guest.com') do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.password_confirmation = user.password
+      user.name = 'guest'
+      user.admin = false
     end
   end
 end

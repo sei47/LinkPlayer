@@ -1,5 +1,19 @@
 <h2>フレンド一覧</h2>
-<% @friends.each do |friend| %>
-  <%= friend.partner.email %>
-  <%= link_to 'フレンド解除', friend_path(friend.id), method: :delete %>
-<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>ユーザー名</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @friends.each do |friend| %>
+      <tr>
+        <td>
+          <%= friend.partner.name %>
+          <%= link_to 'フレンドのマイページ', user_path(friend.partner.id) %>
+          <%= link_to 'フレンド解除', friend_path(friend.id), method: :delete %>
+        </td>
+    <% end %>
+  </tbody>
+</table>

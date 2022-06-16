@@ -12,22 +12,23 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :name %>
+    <%= form.label :コミュニティ名 %>
     <%= form.text_field :name %>
   </div>
 
   <div class="field">
-    <%= form.label :comment %>
+    <%= form.label :コメント %>
     <%= form.text_area :comment %>
   </div>
 
   <div class="field">
-    <%= form.label :icon %>
+    <%= form.label :アイコン画像 %>
     <%= image_tag(community.icon.url)if community.icon && community.icon.url %>
     <%= form.file_field :icon %>
   </div>
 
   <div class="field">
+    <%= form.label :題材 %>
     <% if action_name == 'new' %>
       <%= form.collection_select :game_id, Game.all, :id, :name %>
     <% end %>

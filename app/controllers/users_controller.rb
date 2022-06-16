@@ -21,6 +21,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @request = @user.passive_friends.where(request: false)
+    @communities = @user.communities
   end
 
   private

@@ -5,3 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+10.times do |n|
+  name = Faker::Games::Zelda.game
+  info = Faker::Games::Zelda.location
+  Game.create!(name: name,
+              info: info
+              )
+end
+
+10.times do |n|
+  name = Faker::Games::Zelda.item
+  Tag.create!(name: name)
+end

@@ -1,6 +1,5 @@
 class MessagesController < ApplicationController
   def index
-    binding.irb
     @friends = current_user.passive_friends
     @messages = current_user.messages unless params[:output]
   end

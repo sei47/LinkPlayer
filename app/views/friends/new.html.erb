@@ -1,3 +1,4 @@
+<h2>フレンド申請</h2>
 <% @users.each do |user| %>
   <% unless current_user.friendly?(user) or current_user == user %>
     <%= user.name %>

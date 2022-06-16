@@ -1,5 +1,10 @@
 <h1>コミュニティ一覧</h1>
+<%= search_form_for @q do |f| %>
+  <%= f.label :name, "コミュニティ名" %>
+  <%= f.search_field :name_cont %>
 
+  <%= f.submit "検索" %>
+<% end %>
 <table>
   <thead>
     <tr>
@@ -28,5 +33,5 @@
 </table>
 
 <br>
-
-<%= link_to 'test', new_community_path %>
+<%= link_to '新規ゲーム登録', new_game_path %>
+<%= link_to '新規作成', new_community_path %>

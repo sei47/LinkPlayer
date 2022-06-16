@@ -1,8 +1,10 @@
 class CommunitiesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
+  before_action :community_change_check, only: [:edit, :destroy]
 
   def index
-    @communities = Community.all
+    @q = Community.ransack(params[:search])
+    @communities = @q.result(distinct: true)
   end
 
   def new
@@ -58,6 +60,13 @@ class CommunitiesController < ApplicationController
   end
 
   private
+
+  def community_change_check
+    set_community
+    if @community.create_user_id == current_user or current_user.try(:admin?)
+      redirect_to communities_path, notice: "権限がありません"
+    end
+  end
 
   def set_community
     @community = Community.find(params[:id])
