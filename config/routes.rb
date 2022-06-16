@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
+  mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   resources :users
   resources :messages, only:[:new, :create, :index]
-  resources :friends, only:[:index, :create, :destroy] do
+  resources :friends, only:[:index, :new, :create, :destroy] do
     member do
       post :accept
     end

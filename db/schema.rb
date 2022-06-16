@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_11_174647) do
+ActiveRecord::Schema.define(version: 2022_06_16_014338) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,14 @@ ActiveRecord::Schema.define(version: 2022_06_11_174647) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "message_reads", force: :cascade do |t|
+    t.integer "message_read_last"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_message_reads_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "message"
     t.string "message_image"
@@ -60,6 +68,8 @@ ActiveRecord::Schema.define(version: 2022_06_11_174647) do
     t.bigint "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "destination"
+    t.index ["destination"], name: "index_messages_on_destination"
     t.index ["friend_id"], name: "index_messages_on_friend_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -104,6 +114,7 @@ ActiveRecord::Schema.define(version: 2022_06_11_174647) do
     t.inet "last_sign_in_ip"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "admin", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -111,6 +122,7 @@ ActiveRecord::Schema.define(version: 2022_06_11_174647) do
   add_foreign_key "communities", "games"
   add_foreign_key "community_tags", "communities"
   add_foreign_key "community_tags", "tags"
+  add_foreign_key "message_reads", "users"
   add_foreign_key "messages", "friends"
   add_foreign_key "messages", "users"
   add_foreign_key "participants", "communities"

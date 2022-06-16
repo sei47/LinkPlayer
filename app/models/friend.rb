@@ -16,8 +16,6 @@ class Friend < ApplicationRecord
   end
 
   def unfriend(partner)
-    #if リクエストがtreuなら
-    binding.irb
     active_friends.find_by(partner_id: partner.id).destroy
   end
 end

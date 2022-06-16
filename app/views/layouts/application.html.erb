@@ -8,14 +8,34 @@
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.12/push.min.js"></script>
+    <!-- <script src="encoding.min.js"></script> -->
   </head>
   <body>
+    <% if user_signed_in? %>
+      <% if User.push_message(current_user) %>
+        <script>
+          // var e = Encoding.convert(cookiesArray[1], {
+          //     to: 'UNICODE',
+          //     from: 'SJIS',
+          //     type: 'string' // 文字列で返るよう 'string' を指定
+          //   });
+          Push.create("新着メッセージがあります"), {
+              timeout: 4000,
+              onClick: function () {
+                  window.focus();
+                  this.close();
+              }
+          };
+        </script>
+      <% end %>
+    <% end %>
+
     <% if user_signed_in? %>
       <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
     <% else %>
       <li><%= link_to 'ログイン', new_user_session_path %></li>
       <li><%= link_to 'サインアップ', new_user_registration_path %></li>
-    <% end %>>
+    <% end %>
 
     <% if notice %>
       <p class="alert alert-notice"><%= notice %></p>

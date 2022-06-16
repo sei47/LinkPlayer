@@ -6,6 +6,10 @@ class FriendsController < ApplicationController
     @friends = current_user.active_friends
   end
 
+  def new
+    @users = User.all
+  end
+
   def create
     @user = User.find(params[:friend][:partner_id])
     current_user.friend_request!(@user)

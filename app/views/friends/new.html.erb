@@ -1,0 +1,7 @@
+<% @users.each do |user| %>
+  <% unless current_user.friendly?(user) or current_user == user %>
+    <%= user.name %>
+    <%= user.email %>
+    <%= render 'friend_form', user: user %>
+  <% end %>
+<% end %>

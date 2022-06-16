@@ -1,0 +1,13 @@
+console.log(gon.myself.email);
+console.log(gon.message.message);
+console.log(@message);
+
+Push.create("gon.myself.email",
+  {
+   body: "gon.message.message",
+   onClick: function () {
+   window.focus();
+   this.close();
+   }
+ });
+window.location.href = 'http://localhost:3000/messages';

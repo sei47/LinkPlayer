@@ -10,6 +10,7 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.message_read_create(@user)
     if @user.save
       redirect_to user_path(@user.id)
     else
@@ -20,10 +21,6 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @request = @user.passive_friends.where(request: false)
-  end
-
-  def my_message
-    @friends = current_user.active_friends
   end
 
   private

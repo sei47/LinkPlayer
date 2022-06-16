@@ -1,3 +1,10 @@
-<div id="friend_form_<%= friend.id %>">
-  <%= button_to 'フレンド解除', { controller: 'friends', action: 'destroy', params: {request_id: friend.id} },method: :delete %>
+<div id="friend_form_<%= user.id %>">
+  <% unless current_user.friendly?(user) %>
+    <%= form_with(model: current_user.active_friends.build(partner_id: user.id))  do |f| %>
+      <%= f.hidden_field :partner_id %>
+      <%= f.submit "申請する" %>
+    <% end %>
+  <% else %>
+    <p>申請中</p>
+  <% end %>
 </div>
