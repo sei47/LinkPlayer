@@ -17,3 +17,36 @@ end
   name = Faker::Games::Zelda.item
   Tag.create!(name: name)
 end
+
+5.times do |n|
+  name = Faker::Games::Zelda.item
+  create_user_id = n + 1
+  comment = "test#{n + 1}"
+  game_id = n + 1
+  Communitie.create!(name: name,
+                    comment: comment,
+                    create_user_id: create_user_id,
+                    game_id: game_id)
+end
+
+5.times do |n|
+  name = Faker::Games::Zelda.location
+  email = n + 1
+  comment = "test#{n + 1}"
+  game_id = n + 1
+  Communitie.create!(name: name,
+                    comment: comment,
+                    create_user_id: create_user_id,
+                    game_id: game_id)
+end
+
+5.times do |n|
+  name = Faker::Games::Pokemon.name
+  email = "#{n + 1}@email.com"
+  password = "#{n + 1}@email.com"
+  admin = false
+  User.create!(name: name,
+              email: email,
+              password: password,
+              admin: admin)
+end

@@ -1,19 +1,53 @@
+<%= link_to t('view.message_create'), new_message_path, class: "btn btn-primary new_community" %>
 <% if params[:output] %>
-  <h2>受信一覧</h2>
-  <%= link_to '送信済一覧', messages_path(output: nil) %>
-  <% @friends.each do |friend| %>
-    <% friend.myself.messages.each do |message| %>
-      <%= message.user.name %>
-      <%= message.message %>
-      <%= image_tag(message.message_image.url)if message.message_image && message.message_image.url %>
-    <% end %>
-  <% end %>
+  <h3 class="page">受信一覧</h3>
 <% else %>
-  <h2>送信一覧</h2>
-  <%= link_to '受信一覧', messages_path(output: true) %>
-  <% @messages.each do |message| %>
-    <%= message.friend.partner.email %>
-    <%= message.message %>
-    <%= image_tag(message.message_image.url)if message.message_image && message.message_image.url %>
-  <% end %>
+  <h3 class="page">送信一覧</h3>
 <% end %>
+
+<div class="container">
+  <div class="row">
+    <% if params[:output] %>
+      <%= link_to t('view.sends_index'), messages_path(output: nil), class: "btn btn-success new_game" %>
+      <ul>
+        <% @friends.each do |friend| %>
+          <% friend.myself.messages.each do |message| %>
+            <li class="post_line card">
+              <div class="card-body">
+                <p class="card-header text-left">
+                  <%= message.user.name %>
+                </p>
+                <p class="card-text">
+                  <%= message.message %>
+                </p>
+                <p class="card-text">
+                  <%= image_tag(message.message_image.url)if message.message_image && message.message_image.url %>
+                </p>
+              </div>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
+    <% else %>
+      <%= link_to t('view.receives_index'), messages_path(output: true), class:"btn btn-warning new_game" %>
+      <ul>
+        <% @messages.each do |message| %>
+          <li class="post_line card">
+            <div class="card-body">
+              <p class="card-header text-left">
+                ユーザー名：
+                <%= message.friend.partner.name %>
+              </p>
+              <p class="card-text">
+                <%= message.message %>
+              </p>
+              <p class="card-text">
+                <%= image_tag(message.message_image.url)if message.message_image && message.message_image.url %>
+              </p>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

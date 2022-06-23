@@ -1,6 +1,0 @@
-<h2>送信一覧</h2>
-<% @friends.each do |friend| %>
-  <%= friend.myself.name %>
-  <%= friend.messages.message %>
-  <%= image_tag(friend.messages.message_image.url)if friend.messages.message_image && friend.messages.message_image.url %>
-<% end %>

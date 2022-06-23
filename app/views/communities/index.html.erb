@@ -1,39 +1,54 @@
-<h1>コミュニティ一覧</h1>
-<%= search_form_for @q do |f| %>
-  <%= f.label :name, "コミュニティ名" %>
-  <%= f.search_field :name_cont %>
+<h3 class="page">コミュニティ一覧</h3>
+<div class="container">
+  <div class="row">
+    <%= search_form_for @q do |f| %>
+      <%= f.label :name, t('view.community_name') %>
+      <%= f.search_field :name_cont, placeholder: "コミュニティ名を入力" %>
 
-  <%= f.submit "検索" %>
-<% end %>
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>コミュニティ名</th>
-      <th>題材</th>
-      <th>コメント</th>
-      <th>更新日時</th>
-    </tr>
-  </thead>
+      <%= f.label :name, t('view.tag_name') %>
+      <%= f.collection_select :tags_id_eq, @tags,  :id, :name, include_blank: '指定なし' %>
 
-  <tbody>
-    <% @communities.each do |community| %>
-      <tr>
-        <td><%= image_tag(community.icon.url) %></td>
-        <td><%= community.name %></td>
-        <td><%= community.game.name %></td>
-        <td><%= community.comment %></td>
-        <td><%= community.updated_at %></td>
-        <td><%= link_to 'Show', community %></td>
-        <%if community.create_user_id == current_user or current_user.try(:admin?) %>
-          <td><%= link_to 'Edit', edit_community_path(community) %></td>
-          <td><%= link_to 'Destroy', community, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <% end %>
-      </tr>
+      <%= f.submit t('view.search') %>
     <% end %>
-  </tbody>
-</table>
-
-<br>
-<%= link_to '新規ゲーム登録', new_game_path %>
-<%= link_to '新規作成', new_community_path %>
+    <!-- <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>コミュニティ名</th>
+          <th>題材</th>
+          <th>コメント</th>
+          <th>更新日時</th>
+        </tr>
+      </thead> -->
+        <% @communities.each do |community| %>
+          <div class="card" style="width: 18rem;">
+            <%= image_tag(community.icon.url, size: '320x240', class: "card-img-top") %>
+            <div class="card-body">
+              <h4 class="card-title"><%= community.name %></h4>
+              <h5 class="card-title"><%= community.game.name %></h5>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item"><%= community.comment %></li>
+                <li class="list-group-item">
+                  <% community.tags.each do |tag| %>
+                    <%= tag.name %>
+                  <% end %>
+                </li>
+                <% if community.posts.present? %>
+                  <li class="list-group-item">最終更新日<%= community.posts.last.created_at.strftime("%Y-%m-%d %H:%M:%S") %></li>
+                <% end %>
+              </ul>
+              <%= link_to t('view.show'), community, class: "btn btn-primary" %>
+              <%if community.create_user_id == current_user or current_user.try(:admin?) %>
+                <%= link_to t('view.edit'), edit_community_path(community), class: "btn btn-outline-success" %>
+                <%= link_to t('view.destroy'), community, method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-outline-danger" %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+    <% if user_signed_in? %>
+      <%= link_to t('view.create_game'), new_game_path, class: "btn btn-success new_game" %>
+      <%= link_to t('view.community_create'), new_community_path, class: "btn btn-success new_community" %>
+    <% end %>
+    <%= paginate(@communities) %>
+  </div>
+</div>

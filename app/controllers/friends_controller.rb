@@ -8,6 +8,7 @@ class FriendsController < ApplicationController
 
   def new
     @users = User.all
+    @users = @users.where('name LIKE ?', "%#{params[:name_search]}%") if params[:name_search].present?
   end
 
   def create

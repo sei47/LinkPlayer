@@ -1,20 +1,23 @@
-
-<p>
+<h3 class="page">
   <strong>Title:</strong>
   <%= @community.name %>
-</p>
-<% if @community.join_users.find_by_id(current_user.id) == nil %>
-  <%= button_to '参加', {controller: 'participants', action: 'create', params: {community_id: @community.id, user_id: current_user.id} } %>
-<% else %>
-  <%= button_to '脱退', { controller: 'participants', action: 'destroy', params: {community_id: @community.id, user_id: current_user} },method: :delete %>
-<% end %>
+</h3>
+<div class="container">
+  <div class="row">
+    <% if @community.join_users.find_by_id(current_user.id) == nil %>
+      <%= button_to t('view.community_join'), {controller: 'participants', action: 'create', params: {community_id: @community.id, user_id: current_user.id} }, {class: "btn btn-primary"} %>
+    <% else %>
+      <%= button_to t('view.community_leave'), { controller: 'participants', action: 'destroy', params: {community_id: @community.id, user_id: current_user} }, {method: :delete, class: "btn btn-danger"} %>
+    <% end %>
 
-<div id="posts_area">
-  <!-- 投稿されたコメント一覧をブログの詳細ページに表示するためのrender -->
-  <%= render partial: 'posts/index', locals: { posts: @posts, community: @community } %>
+    <div id="posts_area">
+      <%= render partial: 'posts/index', locals: { posts: @posts, community: @community } %>
+    </div>
+
+    <div id="post_form">
+      <% unless @community.join_users.find_by_id(current_user.id) == nil %>
+        <%= render partial: 'posts/form', locals: { post: @post, community: @community } %>
+      <% end %>
+    </div>
+  </div>
 </div>
-
-<!-- コメント入力欄をブログの詳細ページに表示するためのrender -->
-<%= render partial: 'posts/form', locals: { post: @post, community: @community } %>
-
-<%= link_to 'Edit', edit_community_path(@community) %> |

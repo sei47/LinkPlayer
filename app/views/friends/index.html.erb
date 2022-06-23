@@ -1,19 +1,15 @@
-<h2>フレンド一覧</h2>
-
-<table>
-  <thead>
-    <tr>
-      <th>ユーザー名</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @friends.each do |friend| %>
-      <tr>
-        <td>
-          <%= friend.partner.name %>
-          <%= link_to 'フレンドのマイページ', user_path(friend.partner.id) %>
-          <%= link_to 'フレンド解除', friend_path(friend.id), method: :delete %>
-        </td>
-    <% end %>
-  </tbody>
-</table>
+<h3 class="page">フレンド一覧</h3>
+<div class="container">
+  <div class="row">
+    <ul class="list-group">
+      <% @friends.each do |friend| %>
+        <li class="list-group-item list-group-item-action">
+          ユーザー名：<%= friend.partner.name %>
+          ｜<%= link_to t('view.friend_page'), user_path(friend.partner.id) %>
+          ｜<%= link_to t('view.friend_elimination'), friend_path(friend.id), method: :delete %>
+        </li>
+      <% end %>
+    </ul>
+    <%= link_to t('view.create_friend'), new_friend_path, class: "btn btn-success new_game" %>
+  </div>
+</div>

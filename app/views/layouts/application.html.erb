@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>LinkPlayer</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.12/push.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
   </head>
   <body>
     <% if user_signed_in? %>
@@ -23,32 +24,40 @@
         </script>
       <% end %>
     <% end %>
-
+  <header>
+    <h1 class="title"><%= image_tag("touka.png", size: '200x80') %></h1>
+    <ul class="menu-group">
     <% if user_signed_in? %>
-      <li><%= link_to 'ログアウト', destroy_user_session_path, method: :delete %></li>
+      <li class="header-menu"><%= link_to t('view.logout'), destroy_user_session_path, method: :delete, class: "btn btn-info" %></li>
       <% if request.path_info != communities_path %>
-        <li><%= link_to 'コミュニティ一覧へ', communities_path %></li>
+        <li class="header-menu"><%= link_to t('view.community_index'), communities_path, class: "btn btn-info" %></li>
       <% end %>
       <% if request.path_info != user_path(current_user) %>
-        <li><%= link_to 'マイページ', user_path(current_user) %></li>
+        <li class="header-menu"><%= link_to t('view.my_page'), user_path(current_user), class: "btn btn-info" %></li>
       <% end %>
       <% if request.path_info != friends_path %>
-        <li><%= link_to 'フレンド一覧へ', friends_path %></li>
+        <li class="header-menu"><%= link_to t('view.friend_index'), friends_path, class: "btn btn-info" %></li>
       <% end %>
-      <li><%= link_to '管理画面へ', rails_admin_path %></li>
+      <% if request.path_info != messages_path %>
+        <li class="header-menu"><%= link_to t('view.messages_page'), messages_path, class: "btn btn-info" %></li>
+      <% end %>
+      <li class="header-menu"><%= link_to t('view.admin_page'), rails_admin_path, class: "btn btn-info" %></li>
     <% else %>
-      <li><%= link_to 'ゲストログイン（閲覧用）', users_guest_sign_in_path, method: :post, class: "login" %></li>
-      <li><%= link_to 'ログイン', new_user_session_path %></li>
-      <li><%= link_to 'サインアップ', new_user_registration_path %></li>
-      <li><%= link_to 'コミュニティ一覧へ', communities_path %></li>
+      <li class="header-menu"><%= link_to t('view.guest_page'), users_guest_sign_in_path, method: :post, class: "login btn btn-info" %></li>
+      <li class="header-menu"><%= link_to t('view.admin_guest_page'), users_admin_guest_sign_in_path, method: :post, class: "login btn btn-info" %></li>
+      <li class="header-menu"><%= link_to t('view.login'), new_user_session_path, class: "btn btn-info" %></li>
+      <li class="header-menu"><%= link_to t('view.signin'), new_user_registration_path, class: "btn btn-info" %></li>
+      <li class="header-menu"><%= link_to t('view.community_index'), communities_path, class: "btn btn-info" %></li>
     <% end %>
-
+    </ul>
     <% if notice %>
-      <p class="alert alert-notice"><%= notice %></p>
+      <p class="alert alert-primary"><%= notice %></p>
     <% end %>
     <% if alert %>
-      <p class="alert alert-error"><%= alert %></p>
+      <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+  </header>
     <%= yield %>
+    <footer>LinkPlayer</footer>
   </body>
 </html>

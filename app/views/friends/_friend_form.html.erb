@@ -2,7 +2,7 @@
   <% unless current_user.friendly?(user) %>
     <%= form_with(model: current_user.active_friends.build(partner_id: user.id))  do |f| %>
       <%= f.hidden_field :partner_id %>
-      <%= f.submit "申請する" %>
+      <%= f.submit t('view.friend_request'), {class: "btn btn-primary"} %>
     <% end %>
   <% else %>
     <p>申請中</p>

@@ -3,8 +3,9 @@ class CommunitiesController < ApplicationController
   before_action :community_change_check, only: [:edit, :destroy]
 
   def index
-    @q = Community.ransack(params[:search])
-    @communities = @q.result(distinct: true)
+    @q = Community.ransack(params[:q])
+    @tags = Tag.all
+    @communities = @q.result.includes(:tags).page(params[:page]).per(8)
   end
 
   def new

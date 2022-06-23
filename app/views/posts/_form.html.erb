@@ -10,17 +10,15 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :content %>
-    <%= form.text_area :content %>
-  </div>
+  <div class="input-group mb-3">
+    <%= form.label :content, class: "input-group-text" %>
+    <%= form.text_area :content, class: "form-control" %>
 
-  <div class="field">
-    <%= form.label :image %>
-    <%= image_tag(post.image.url)if post.image && post.image.url %>
-    <%= form.file_field :image %>
+    <%= form.label :image, class: "input-group-text" %>
+    <%= image_tag(post.image.url, size: '320x240')if post.image && post.image.url %>
+    <%= form.file_field :image, class: "form-control" %>
   </div>
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit t('view.post_create') %>
   </div>
 <% end %>

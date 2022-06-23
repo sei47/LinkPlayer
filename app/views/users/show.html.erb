@@ -1,29 +1,49 @@
-<% if @request.present?  %>
-  <% @request.each do |request| %>
-    <p>ユーザー名：<%= request.myself.name %></p>
-    <%= button_to '承認', { controller: 'friends', action: 'accept', params: {request_id: request.id} } %>
-    ―――――――――――――――――――――――
-    <%= button_to '拒否', { controller: 'friends', action: 'destroy', params: {id: request.id} },method: :delete %>
-  <% end %>
-<% end %>
-
-<table>
-  <thead>
-    <tr>
-      <th></th>
-      <th>所属コミュニティ</th>
-      <th>題材</th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @communities.each do |community| %>
-      <tr>
-        <td><%= image_tag(community.icon.url) %></td>
-        <td><%= community.name %></td>
-        <td><%= community.game.name %></td>
-        <td><%= link_to 'Show', community %></td>
-      </tr>
+<div class="container">
+  <div class="row">
+    <% if @request.present?  %>
+        <% @request.each do |request| %>
+          <div class="card">
+            <div class="card-header">
+              <p>ユーザー名：<%= request.myself.name %></p>
+            </div>
+            <div class="list-group list-group-flush">
+              <li class="list-group-item">
+                <%= button_to t('view.accept'), { controller: 'friends', action: 'accept', params: {request_id: request.id} }, {class: "btn btn-primary"} %>
+              </li>
+              <li class="list-group-item">
+                <%= button_to t('view.unfriend'), { controller: 'friends', action: 'destroy', params: {id: request.id} }, {method: :delete, class: "btn btn-danger"} %>
+              </li>
+            </div>
+          </div>
+        <% end %>
     <% end %>
-  </tbody>
-</table>
+    <div>
+      <h4>参加コミュニティ一覧</h4>
+      <% @communities.each do |community| %>
+        <div class="card" style="width: 18rem;">
+          <%= image_tag(community.icon.url, size: '320x240', class: "card-img-top") %>
+          <div class="card-body">
+            <h4 class="card-title"><%= community.name %></h4>
+            <h5 class="card-title"><%= community.game.name %></h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><%= community.comment %></li>
+              <li class="list-group-item">
+                <% community.tags.each do |tag| %>
+                  <%= tag.name %>
+                <% end %>
+              </li>
+              <% if community.posts.present? %>
+                <li class="list-group-item">最終更新日<%= community.posts.last.created_at.strftime("%Y-%m-%d %H:%M:%S") %></li>
+              <% end %>
+            </ul>
+            <%= link_to t('view.show'), community, class: "btn btn-primary" %>
+            <%if community.create_user_id == current_user or current_user.try(:admin?) %>
+              <%= link_to t('view.edit'), edit_community_path(community), class: "btn btn-outline-success" %>
+              <%= link_to t('view.destroy'), community, method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-outline-danger" %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
