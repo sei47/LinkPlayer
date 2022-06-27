@@ -16,7 +16,6 @@
         <%= link_to t('view.community_create'), new_community_path, class: "btn btn-success new_community" %>
       <% end %>
     <!-- </div> -->
-      <div class="col-sm-10">
         <% @communities.each do |community| %>
           <div class="card" style="width: 18rem;">
             <%= image_tag(community.icon.url, size: '320x240', class: "card-img-top") %>
@@ -44,9 +43,8 @@
             </div>
           </div>
         <% end %>
-        <div class="page_nate">
+        <div>
           <%= paginate(@communities) %>
         </div>
-      </div>
   </div>
 </div>
