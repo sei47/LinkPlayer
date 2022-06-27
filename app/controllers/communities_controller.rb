@@ -48,7 +48,7 @@ class CommunitiesController < ApplicationController
   def update
     set_community
     if @community.update(community_params)
-      redirect_to communities_path, notice: "更新しました"
+      redirect_to community_path(@community.id), notice: "更新しました"
     else
       render :edit
     end
@@ -64,9 +64,7 @@ class CommunitiesController < ApplicationController
 
   def community_change_check
     set_community
-    if @community.create_user_id == current_user or current_user.try(:admin?)
-      redirect_to communities_path, notice: "権限がありません"
-    end
+    redirect_to communities_path, notice: "権限がありません" unless @community.create_user_id == current_user.id or current_user.try(:admin?)
   end
 
   def set_community

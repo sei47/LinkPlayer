@@ -4,10 +4,12 @@
 </h3>
 <div class="container">
   <div class="row">
-    <% if @community.join_users.find_by_id(current_user.id) == nil %>
-      <%= button_to t('view.community_join'), {controller: 'participants', action: 'create', params: {community_id: @community.id, user_id: current_user.id} }, {class: "btn btn-primary"} %>
-    <% else %>
-      <%= button_to t('view.community_leave'), { controller: 'participants', action: 'destroy', params: {community_id: @community.id, user_id: current_user} }, {method: :delete, class: "btn btn-danger"} %>
+    <% if user_signed_in? %>
+      <% if @community.join_users.find_by_id(current_user.id) == nil %>
+        <%= button_to t('view.community_join'), {controller: 'participants', action: 'create', params: {community_id: @community.id, user_id: current_user.id} }, {class: "btn btn-primary"} %>
+      <% else %>
+        <%= button_to t('view.community_leave'), { controller: 'participants', action: 'destroy', params: {community_id: @community.id, user_id: current_user} }, {method: :delete, class: "btn btn-danger"} %>
+      <% end %>
     <% end %>
 
     <div id="posts_area">
@@ -15,8 +17,10 @@
     </div>
 
     <div id="post_form">
-      <% unless @community.join_users.find_by_id(current_user.id) == nil %>
-        <%= render partial: 'posts/form', locals: { post: @post, community: @community } %>
+      <% if user_signed_in? %>
+        <% unless @community.join_users.find_by_id(current_user.id) == nil %>
+          <%= render partial: 'posts/form', locals: { post: @post, community: @community } %>
+        <% end %>
       <% end %>
     </div>
   </div>

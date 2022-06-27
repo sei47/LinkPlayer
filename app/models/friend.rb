@@ -1,7 +1,7 @@
 class Friend < ApplicationRecord
   belongs_to :myself, class_name: "User"
   belongs_to :partner, class_name: "User"
-  has_many :messages
+  has_many :messages, dependent: :destroy
 
   # def self.friend_search(friends, name_search)
   #   friends.each do |friend|

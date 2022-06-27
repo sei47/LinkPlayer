@@ -41,7 +41,9 @@
       <% if request.path_info != messages_path %>
         <li class="header-menu"><%= link_to t('view.messages_page'), messages_path, class: "btn btn-info" %></li>
       <% end %>
-      <li class="header-menu"><%= link_to t('view.admin_page'), rails_admin_path, class: "btn btn-info" %></li>
+      <% if current_user.admin %>
+        <li class="header-menu"><%= link_to t('view.admin_page'), rails_admin_path, class: "btn btn-info" %></li>
+      <% end %>
     <% else %>
       <li class="header-menu"><%= link_to t('view.guest_page'), users_guest_sign_in_path, method: :post, class: "login btn btn-info" %></li>
       <li class="header-menu"><%= link_to t('view.admin_guest_page'), users_admin_guest_sign_in_path, method: :post, class: "login btn btn-info" %></li>
@@ -58,6 +60,6 @@
     <% end %>
   </header>
     <%= yield %>
-    <footer>LinkPlayer</footer>
+    <footer class="fixed-bottom">LinkPlayer</footer>
   </body>
 </html>

@@ -21,7 +21,6 @@ header {
   width: 100%;
   height: 100px;
   background-color: #2c2c2c;
-  /* background-image: url("https://www.cybernet.co.jp/goldfire/images/column/2022/fig04.jpg"); */
   align-items: center;
 }
 
@@ -138,7 +137,7 @@ tr{
 }
 
 footer {
-  position: absolute;
+  position: flex;
   color: white;
   background-color: #2c2c2c;
   bottom: 0;
@@ -150,4 +149,13 @@ footer {
 
 .alert {
   margin-bottom: 0;
+}
+
+.btn_action {
+  margin-top: 1rem;
+}
+
+.info {
+  background: #40e0d0;
+  color: #708090;
 }

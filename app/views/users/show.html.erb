@@ -1,24 +1,25 @@
+<h4 class="sticky-top info text-center">参加コミュニティ一覧</h4>
 <div class="container">
   <div class="row">
-    <% if @request.present?  %>
-        <% @request.each do |request| %>
-          <div class="card">
-            <div class="card-header">
-              <p>ユーザー名：<%= request.myself.name %></p>
-            </div>
-            <div class="list-group list-group-flush">
-              <li class="list-group-item">
-                <%= button_to t('view.accept'), { controller: 'friends', action: 'accept', params: {request_id: request.id} }, {class: "btn btn-primary"} %>
-              </li>
-              <li class="list-group-item">
-                <%= button_to t('view.unfriend'), { controller: 'friends', action: 'destroy', params: {id: request.id} }, {method: :delete, class: "btn btn-danger"} %>
-              </li>
-            </div>
+  <% if @request.present?  %>
+      <% @request.each do |request| %>
+        <div class="card">
+          <div class="card-header">
+            <p>ユーザー名：<%= request.myself.name %></p>
           </div>
-        <% end %>
-    <% end %>
-    <div>
-      <h4>参加コミュニティ一覧</h4>
+          <div class="list-group list-group-flush">
+            <li class="list-group-item">
+              <%= button_to t('view.accept'), { controller: 'friends', action: 'accept', params: {request_id: request.id} }, {class: "btn btn-primary"} %>
+            </li>
+            <li class="list-group-item">
+              <%= button_to t('view.unfriend'), { controller: 'friends', action: 'destroy', params: {id: request.id} }, {method: :delete, class: "btn btn-danger"} %>
+            </li>
+          </div>
+        </div>
+      <% end %>
+  <% end %>
+  </div>
+  <div class="row">
       <% @communities.each do |community| %>
         <div class="card" style="width: 18rem;">
           <%= image_tag(community.icon.url, size: '320x240', class: "card-img-top") %>
@@ -37,13 +38,14 @@
               <% end %>
             </ul>
             <%= link_to t('view.show'), community, class: "btn btn-primary" %>
-            <%if community.create_user_id == current_user or current_user.try(:admin?) %>
-              <%= link_to t('view.edit'), edit_community_path(community), class: "btn btn-outline-success" %>
-              <%= link_to t('view.destroy'), community, method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-outline-danger" %>
+            <%if community.create_user_id == current_user.id or current_user.try(:admin?) %>
+              <div class="btn_action">
+                <%= link_to t('view.edit'), edit_community_path(community), class: "btn btn-outline-success" %>
+                <%= link_to t('view.destroy'), community, method: :delete, data: { confirm: t('view.confirm') }, class: "btn btn-outline-danger" %>
+              </div>
             <% end %>
           </div>
         </div>
       <% end %>
-    </div>
   </div>
 </div>
