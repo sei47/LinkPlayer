@@ -221,6 +221,7 @@ ja:
     destroy: 削除する
     create: 登録する
     community_name: コミュニティ名
+    community_comment: コメント
     search: 検索
     create_game: ゲーム登録
     community_create: コミュニティ作成

@@ -3,7 +3,10 @@
   <div class="row">
     <%= search_form_for @q do |f| %>
       <%= f.label :name, t('view.community_name') %>
-      <%= f.search_field :name_cont, placeholder: "コミュニティ名を入力" %>
+      <%= f.search_field :name_cont, placeholder: "一部でも検索できます" %>
+
+      <%= f.label :comment, t('view.community_comment') %>
+      <%= f.search_field :comment_cont, placeholder: "一部でも検索できます" %>
 
       <%= f.label :name, t('view.tag_name') %>
       <%= f.collection_select :tags_id_eq, @tags,  :id, :name, include_blank: '指定なし' %>
