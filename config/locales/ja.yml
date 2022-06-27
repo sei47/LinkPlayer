@@ -1,6 +1,15 @@
 ---
 ja:
   activerecord:
+    attributes:
+      post:
+        content: テキスト
+      community:
+        name: タイトル
+        comment: コメント
+      game:
+        name: ゲームタイトル
+        info: 概要
     errors:
       messages:
         record_invalid: 'バリデーションに失敗しました: %{errors}'
@@ -220,7 +229,7 @@ ja:
     friend_request: 申請する
     friend_elimination: 解除する
     friend_page: フレンドのページへ
-    signin: サインイン
+    signin: サインアップ
     login: ログイン
     logout: ログアウト
     community_index: コミュニティ一覧へ

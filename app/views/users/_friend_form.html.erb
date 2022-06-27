@@ -6,7 +6,7 @@
     <% end %>
   <% else %>
     <%= form_with(model: current_user.active_friends.find_by(partner_id: user.id), method: :delete ) do |f| %>
-      <%= f.submit "解除" %>
+      <p>申請中</p>
     <% end %>
   <% end %>
 </div>

@@ -9,7 +9,9 @@ class MessagesController < ApplicationController
     @message = Message.new
     @friends  = current_user.active_friends
     @friends.each do |friend|
-      @partners.push(friend.partner)
+      if friend.request
+        @partners.push(friend.partner)
+      end
     end
   end
 

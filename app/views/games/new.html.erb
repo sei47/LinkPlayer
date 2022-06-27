@@ -4,7 +4,7 @@
     <%= form_with(model: @game, local: true) do |form| %>
       <% if @game.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@game.errors.count, "error") %> prohibited this game from being saved:</h2>
+          <h2>登録に失敗しました</h2>
 
           <ul>
             <% @game.errors.full_messages.each do |message| %>
@@ -15,12 +15,12 @@
       <% end %>
 
       <div class="input-group mb-3">
-        <%= form.label :name, class: "input-group-text" %>
+        <%= form.label :ゲームタイトル, class: "input-group-text" %>
         <%= form.text_field :name, class: "form-control" %>
       </div>
 
       <div class="input-group mb-3">
-        <%= form.label :info, class: "input-group-text" %>
+        <%= form.label :概要, class: "input-group-text" %>
         <%= form.text_area :info, class: "form-control" %>
       </div>
 

@@ -3,7 +3,7 @@
     <%= form_with(model: community, local: true) do |form| %>
       <% if community.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(community.errors.count, "error") %> prohibited this blog from being saved:</h2>
+          <h2>作成に失敗しました</h2>
 
           <ul>
             <% community.errors.full_messages.each do |message| %>
@@ -13,33 +13,33 @@
         </div>
       <% end %>
 
-      <div class="field">
-        <%= form.label :コミュニティ名 %>
-        <%= form.text_field :name %>
+      <div class="input-group mb-3">
+        <%= form.label :コミュニティ名, class: "input-group-text" %>
+        <%= form.text_field :name, class: "form-control" %>
       </div>
 
-      <div class="field">
-        <%= form.label :コメント %>
-        <%= form.text_area :comment %>
+      <div class="input-group mb-3">
+        <%= form.label :コメント, class: "input-group-text" %>
+        <%= form.text_area :comment, class: "form-control" %>
       </div>
 
-      <div class="field">
-        <%= form.label :アイコン画像 %>
+      <div class="input-group mb-3">
+        <%= form.label :アイコン画像, class: "input-group-text" %>
         <%= image_tag(community.icon.url)if community.icon && community.icon.url %>
-        <%= form.file_field :icon %>
+        <%= form.file_field :icon, class: "form-control" %>
       </div>
 
-      <div class="field">
-        <%= form.label :題材 %>
+      <div class="input-group mb-3">
+        <%= form.label :題材, class: "input-group-text" %>
         <% if action_name == 'new' %>
-          <%= form.collection_select :game_id, Game.all, :id, :name %>
+          <%= form.collection_select :game_id, Game.all, :id, :name, class: "form-control" %>
         <% end %>
       </div>
 
-      <div class="field">
-        <%= form.label :タグ %>
+      <div class="input-group mb-3">
+        <%= form.label :タグ, class: "input-group-text" %>
         <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
-          <%= tag.label { tag.check_box + tag.text } %>
+          <%= tag.label { tag.check_box + tag.text } %>_
         <% end %>
       </div>
       <div class="actions">
