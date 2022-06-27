@@ -23,18 +23,7 @@ end
   create_user_id = n + 1
   comment = "test#{n + 1}"
   game_id = n + 1
-  Communitie.create!(name: name,
-                    comment: comment,
-                    create_user_id: create_user_id,
-                    game_id: game_id)
-end
-
-5.times do |n|
-  name = Faker::Games::Zelda.location
-  email = n + 1
-  comment = "test#{n + 1}"
-  game_id = n + 1
-  Communitie.create!(name: name,
+  Community.create!(name: name,
                     comment: comment,
                     create_user_id: create_user_id,
                     game_id: game_id)
