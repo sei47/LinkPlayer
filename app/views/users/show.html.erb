@@ -1,7 +1,8 @@
-<h4 class="sticky-top info text-center">参加コミュニティ一覧</h4>
+<h3 class="page"><%= @user.name %>のユーザーページ</h3>
 <div class="container">
   <div class="row">
-  <% if @request.present?  %>
+    <h4 class="sticky-top info text-center">参加コミュニティ一覧</h4>
+  <% if @request.present? and @user == current_user %>
       <% @request.each do |request| %>
         <div class="card">
           <div class="card-header">

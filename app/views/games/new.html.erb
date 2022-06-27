@@ -1,32 +1,33 @@
 <h3 class="page">新規登録</h3>
 <div class="container">
   <div class="row">
-    <%= form_with(model: @game, local: true) do |form| %>
-      <% if @game.errors.any? %>
-        <div id="error_explanation">
-          <h2>登録に失敗しました</h2>
+    <div class="col-sm-7 m-3">
+      <%= form_with(model: @game, local: true) do |form| %>
+        <% if @game.errors.any? %>
+          <div id="error_explanation">
+            <h2>登録に失敗しました</h2>
 
-          <ul>
-            <% @game.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
+            <ul>
+              <% @game.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+          <div class="input-group mb-3">
+            <%= form.label :ゲームタイトル, class: "input-group-text" %>
+            <%= form.text_field :name, class: "form-control" %>
+          </div>
+
+          <div class="input-group mb-3">
+            <%= form.label :概要, class: "input-group-text" %>
+            <%= form.text_area :info, class: "form-control" %>
+          </div>
+
+          <div class="actions">
+            <%= form.submit %>
+          </div>
       <% end %>
-
-      <div class="input-group mb-3">
-        <%= form.label :ゲームタイトル, class: "input-group-text" %>
-        <%= form.text_field :name, class: "form-control" %>
-      </div>
-
-      <div class="input-group mb-3">
-        <%= form.label :概要, class: "input-group-text" %>
-        <%= form.text_area :info, class: "form-control" %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit %>
-      </div>
-    <% end %>
+    </div>
   </div>
 </div>

@@ -30,7 +30,7 @@ body{
 }
 
 .title {
-  margin-right: auto;
+  margin-left: 65px;
   display: inline-block;
   color: #00fa9a;
 }
@@ -157,5 +157,18 @@ footer {
 
 .info {
   background: #40e0d0;
-  color: #708090;
+  /* color: #708090; */
 }
+
+.page_nate {
+  margin-bottom: 3rem;
+}
+
+/* .drawer-hamburger-icon,
+.drawer-hamburger-icon:after,
+.drawer-hamburger-icon:before {
+    background: #3EA1D1;
+}
+.drawer-hamburger {
+    background: #a3c5d6;
+} */

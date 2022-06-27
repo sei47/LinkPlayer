@@ -1,36 +1,40 @@
 <h3 class="page">メッセージ送信</h3>
 <div class="container">
   <div class="row">
-    <%= form_with(model: @message) do |form| %>
-      <% if @message.errors.any? %>
-        <div id="error_explanation">
-          <h2>作成に失敗しました</h2>
+    <div class="col-sm-7 m-3">
+      <%= form_with(model: @message) do |form| %>
+        <% if @message.errors.any? %>
+          <div id="error_explanation">
+            <h2>作成に失敗しました</h2>
 
-          <ul>
-            <% @message.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
+            <ul>
+              <% @message.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="input-group mb-3">
+          <%= form.label :friend, class: "input-group-text" %>
+          <%= form.select :partner_search, @partners.pluck(:name, :id), class: "form-control" %>
+        </div>
+
+        <div class="input-group mb-3">
+          <%= form.label :message, class: "input-group-text" %>
+          <%= form.text_field :message, class: "form-control", placeholder: "送信する内容を入力" %>
+        </div>
+
+        <div class="input-group mb-3">
+          <%= form.label :message_image, class: "input-group-text" %>
+          <%= image_tag(@message.message_image.url, class: "input-group-text")if @message.message_image && @message.message_image.url %>
+          <%= form.file_field :message_image, class: "input-group-text" %>
+        </div>
+
+        <div class="actions">
+          <%= form.submit t('view.send') %>
         </div>
       <% end %>
-
-      <div class="input-group mb-3">
-        <%= form.label :friend, class: "input-group-text" %>
-        <%= form.select :partner_search, @partners.pluck(:name, :id), class: "form-control" %>
-      </div>
-
-      <div class="input-group mb-3">
-        <%= form.label :message, class: "input-group-text" %>
-        <%= form.text_field :message, class: "form-control", placeholder: "送信する内容を入力" %>
-      </div>
-
-      <div class="input-group mb-3">
-        <%= form.label :message_image, class: "input-group-text" %>
-        <%= image_tag(@message.message_image.url, class: "input-group-text")if @message.message_image && @message.message_image.url %>
-        <%= form.file_field :message_image, class: "input-group-text" %>
-      </div>
-
-      <div class="actions">
-        <%= form.submit t('view.send') %>
-      </div>
-    <% end %>
+    </div>
+  </div>
+</div>

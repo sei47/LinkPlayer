@@ -10,16 +10,13 @@
 
       <%= f.submit t('view.search') %>
     <% end %>
-    <!-- <table>
-      <thead>
-        <tr>
-          <th></th>
-          <th>コミュニティ名</th>
-          <th>題材</th>
-          <th>コメント</th>
-          <th>更新日時</th>
-        </tr>
-      </thead> -->
+    <!-- <div class="col-sm-2"> -->
+      <% if user_signed_in? %>
+        <%= link_to t('view.create_game'), new_game_path, class: "btn btn-success new_game" %>
+        <%= link_to t('view.community_create'), new_community_path, class: "btn btn-success new_community" %>
+      <% end %>
+    <!-- </div> -->
+      <div class="col-sm-10">
         <% @communities.each do |community| %>
           <div class="card" style="width: 18rem;">
             <%= image_tag(community.icon.url, size: '320x240', class: "card-img-top") %>
@@ -47,10 +44,9 @@
             </div>
           </div>
         <% end %>
-    <% if user_signed_in? %>
-      <%= link_to t('view.create_game'), new_game_path, class: "btn btn-success new_game" %>
-      <%= link_to t('view.community_create'), new_community_path, class: "btn btn-success new_community" %>
-    <% end %>
-    <%= paginate(@communities) %>
+        <div class="page_nate">
+          <%= paginate(@communities) %>
+        </div>
+      </div>
   </div>
 </div>
