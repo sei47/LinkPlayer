@@ -21,14 +21,19 @@ class MessagesController < ApplicationController
     @message.friend_id = @friend.id
     @message.user_id = current_user.id
     @message.destination = @friend.partner.id
-    respond_to do |format|
-      if @message.save
-        format.html { redirect_to messages_path, notice: "登録しました" }
-      else
-            binding.irb
-        format.html { render :new }
-        flash.now[:danger] = "保存に失敗しました"
+    if @message.save
+      redirect_to messages_path, notice: "登録しました"
+    else
+      @partners = []
+      @friends  = current_user.active_friends
+      @friends.each do |friend|
+        if friend.request
+          @partners.push(friend.partner)
+        end
       end
+      render :new
+      # format.html { render :new }
+      # flash.now[:danger] = "保存に失敗しました"
     end
   end
 

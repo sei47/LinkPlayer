@@ -65,32 +65,40 @@
     <% if alert %>
       <p class="alert alert-danger"><%= alert %></p>
     <% end %>
+    <% if user_signed_in? %>
+      <body class="drawer drawer--left">
+      <div role="banner">
+    <!-- ハンバーガーボタン -->
+        <button type="button" class="drawer-toggle drawer-hamburger bg-primary">
+          <span class="sr-only">toggle navigation</span>
+          <span class="drawer-hamburger-icon"></span>
+        </button>
+    <!-- ナビゲーションの中身 -->
+        <nav class="drawer-nav bg-secondary" role="navigation">
+          <ul class="drawer-menu list-group">
+            <li class="list-group-item list-group-item-primary"><h3 class="drawer-brand">LinkPlayer</h3></li>
+            <li class="list-group-item list-group-item-primary">カーソルをボタンに合わせると説明が表示されます</li>
+            <li class="list-group-item text-center bg-secondary"><%= link_to t('view.create_game'), new_game_path, class: "btn btn-success mb-3", 'data-toggle': :tooltip, 'data-placement': :'right', 'title': :'題材にしたいゲームが無い場合はここから新しく登録出来ます' %></li>
+            <li class="list-group-item text-center bg-secondary"><%= link_to t('view.community_create'), new_community_path, class: "btn btn-success mb-3", 'data-toggle': :tooltip, 'data-placement': :'right', 'title': :'新規作成には題材とするゲームが必要なので存在しない場合は先にゲーム登録をしてください' %></li>
+            <li class="list-group-item text-center bg-secondary"><%= link_to t('view.message_create'), new_message_path, class: "btn btn-primary mb-3", 'data-toggle': :tooltip, 'data-placement': :'right', 'title': :'フレンドへのメッセージ作成画面に移動します' %></li>
+            <li class="list-group-item text-center bg-secondary"><%= link_to t('view.receives_index'), messages_path(output: true), class: "btn btn-warning mb-3", 'data-toggle': :tooltip, 'data-placement': :'right', 'title': :'フレンドから受信したメッセージ一覧を表示します' %></li>
+            <li class="list-group-item text-center bg-secondary"><%= link_to t('view.sends_index'), messages_path(output: nil), class: "btn btn-success mb-3", 'data-toggle': :tooltip, 'data-placement': :'right', 'title': :'フレンドに送信したメッセージ一覧を表示します' %></li>
+            <li class="list-group-item text-center bg-secondary"><%= link_to t('view.create_friend'), new_friend_path, class: "btn btn-success mb-3", 'data-toggle': :tooltip, 'data-placement': :'right', 'title': :'フレンド申請画面に移動します' %></li>
+          </ul>
+        </nav>
+      </div>
+      <main role="main">
+    </main>
+    <!-- drawer利用の宣言 -->
+      <script>
+        $(document).ready(function() {
+        $('.drawer').drawer(); });
+      </script>
+
+    </body>
+  <% end %>
   </header>
     <%= yield %>
     <footer class="fixed-bottom">LinkPlayer</footer>
   </body>
-  <!-- <body class="drawer drawer--left">
-  <header role="banner">
-    <button type="button" class="drawer-toggle drawer-hamburger">
-      <span class="sr-only">toggle navigation</span>
-      <span class="drawer-hamburger-icon"></span>
-    </button>
-    <nav class="drawer-nav" role="navigation">
-      <ul class="drawer-menu">
-        <li><a class="drawer-brand" href="#">Brand</a></li>
-        <li><a class="drawer-menu-item" href="#">Nav1</a></li>
-        <li><a class="drawer-menu-item" href="#">Nav2</a></li>
-      </ul>
-    </nav> -->
-  <!-- </header>
-  <main role="main"> -->
-    <!-- Page content -->
-  <!-- </main> -->
-
-  <!-- ドロワーメニューの利用宣言 -->
-  <script>
-    $(document).ready(function() {
-    $('.drawer').drawer();
-  });
-  </script>
 </html>

@@ -10,13 +10,15 @@
       <% else %>
         <%= button_to t('view.community_leave'), { controller: 'participants', action: 'destroy', params: {community_id: @community.id, user_id: current_user} }, {method: :delete, class: "btn btn-danger"} %>
       <% end %>
+    <% else %>
+        <h3 class="text-center" style="width: 100%">ログインしてコミュニティに参加することで投稿することが出来ます</h3>
     <% end %>
-
-    <div id="posts_area">
+    <div id="posts_area" style="width: 100%;">
+      <h3 class="text-center">投稿一覧</h3>
       <%= render partial: 'posts/index', locals: { posts: @posts, community: @community } %>
     </div>
 
-    <div id="post_form">
+    <div id="post_form" style="width: 80%;">
       <% if user_signed_in? %>
         <% unless @community.join_users.find_by_id(current_user.id) == nil %>
           <%= render partial: 'posts/form', locals: { post: @post, community: @community } %>
