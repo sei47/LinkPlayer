@@ -6,20 +6,20 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 10.times do |n|
-  name = Faker::Games::Zelda.game
+  name = Faker::Game.title
   info = Faker::Games::Zelda.location
   Game.create!(name: name,
               info: info
               )
 end
 
-10.times do |n|
-  name = Faker::Games::Zelda.item
+5.times do |n|
+  name = Faker::Game.genre
   Tag.create!(name: name)
 end
 
 5.times do |n|
-  name = Faker::Games::Zelda.item
+  name = Faker::Games::Zelda.location
   create_user_id = n + 1
   comment = "test#{n + 1}"
   game_id = n + 1
@@ -30,7 +30,7 @@ end
 end
 
 5.times do |n|
-  name = Faker::Games::Pokemon.name
+  name = Faker::Name.first_name
   email = "#{n + 1}@email.com"
   password = "#{n + 1}@email.com"
   admin = false
