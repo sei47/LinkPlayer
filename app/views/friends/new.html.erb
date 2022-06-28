@@ -1,4 +1,7 @@
 <h3 class="page">フレンド申請</h3>
+<% if params[:info] %>
+  <p class="alert alert-danger"><%= params[:info] %></p>
+<% end %>
 <div class="container">
   <div class="row">
     <%= form_with(url: new_friend_path, method: :get, local: true) do |form| %>
@@ -8,15 +11,15 @@
       <%= form.submit t('view.search') %>
     <% end %>
     <ul class="list-group">
-      <li class="list-group-item list-group-item-action">
         <% @users.each do |user| %>
           <% unless current_user.friendly?(user) or current_user == user %>
-            <%= user.name %>
-            <%= user.email %>
+          <li class="list-group-item list-group-item-action mb-3">
+            ユーザー名：<%= user.name %><br>
+            メールアドレス：<%= user.email %>
             <%= render 'friend_form', user: user %>
+          </li>
           <% end %>
         <% end %>
-      </li>
     </ul>
   </div>
 </div>
