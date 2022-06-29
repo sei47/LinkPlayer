@@ -16,7 +16,7 @@ class MessagesController < ApplicationController
   end
 
   def create
-    if @friend != nil
+    if params[:message][:partner_search] != nil
       @friend = Friend.where(myself_id: current_user.id).find_by(partner_id: params[:message][:partner_search])
       @message = Message.new(message_params)
       @message.friend_id = @friend.id
