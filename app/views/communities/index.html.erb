@@ -6,7 +6,7 @@
       <%= f.search_field :name_cont, placeholder: "一部でも検索できます" %>
 
       <%= f.label :comment, t('view.community_comment') %>
-      <%= f.search_field :comment_cont, placeholder: "一部でも検索できます" %>
+      <%= f.search_field :posts_content_cont, placeholder: "投稿内容で検索できます", style:"width: 13rem;" %>
 
       <%= f.label :name, t('view.tag_name') %>
       <%= f.collection_select :tags_id_eq, @tags,  :id, :name, include_blank: '指定なし' %>
@@ -22,7 +22,7 @@
               <h4 class="card-title"><%= community.name %></h4>
               <h5 class="card-title"><%= community.game.name %></h5>
               <ul class="list-group list-group-flush">
-                <li class="list-group-item">コメント：<%= community.comment %></li>
+                <li class="list-group-item">紹介文：<%= community.comment %></li>
                 <li class="list-group-item">
                   <% community.tags.each do |tag| %>
                     <%= tag.name %>

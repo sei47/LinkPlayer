@@ -5,6 +5,7 @@ class CommunitiesController < ApplicationController
   def index
     @q = Community.ransack(params[:q])
     @tags = Tag.all
+    @communities = @q.result.includes(:posts).page(params[:page]).per(8)
     @communities = @q.result.includes(:tags).page(params[:page]).per(8)
   end
 
