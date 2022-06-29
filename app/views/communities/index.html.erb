@@ -13,8 +13,6 @@
 
       <%= f.submit t('view.search') %>
     <% end %>
-    <!-- <div class="col-sm-2"> -->
-    <!-- </div> -->
         <% @communities.each do |community| %>
           <div class="card" style="width: 18rem;">
             <%= image_tag(community.icon.url, size: '320x240', class: "card-img-top") %>
