@@ -28,14 +28,12 @@
           <%= image_tag(community.icon.url, size: '320x240')if community.icon && community.icon.url %>
           <%= form.file_field :icon, class: "form-control" %>
         </div>
-
-        <div class="input-group mb-3">
-          <%= form.label :ゲーム, class: "input-group-text" %>
-          <% if action_name == 'new' %>
+        <% if action_name == 'new' %>
+          <div class="input-group mb-3">
+            <%= form.label :ゲーム, class: "input-group-text" %>
             <%= form.collection_select :game_id, Game.all, :id, :name, class: "form-control" %>
-          <% end %>
-        </div>
-
+          </div>
+        <% end %>
         <div class="input-group mb-3">
           <%= form.label :タグ, class: "input-group-text" %>
           <%= form.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
